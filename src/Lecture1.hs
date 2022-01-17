@@ -132,9 +132,9 @@ and lower than 6 elements (4, 5, 6, 7, 8 and 9).
 🕯 HINT: Use recursion to implement this function.
 -}
 lowerAndGreater :: Int -> [Int] -> [Char]
-lowerAndGreater n list = output n list (0::Int) (0::Int)
-  where output num numlist greater lower
-          | null numlist = show num ++ " is greater than " ++ show greater ++ " elements and lower than " ++ show lower ++ " elements"
-          | head numlist < num = output num (tail numlist) (greater + 1) lower
-          | head numlist > num = output num (tail numlist) greater (lower + 1)
-          | otherwise = output num (tail numlist) greater lower
+lowerAndGreater n list = output list (0::Int) (0::Int)
+  where output numlist greater lower
+          | null numlist = show n ++ " is greater than " ++ show greater ++ " elements and lower than " ++ show lower ++ " elements"
+          | head numlist < n = output (tail numlist) (greater + 1) lower
+          | head numlist > n = output (tail numlist) greater (lower + 1)
+          | otherwise = output (tail numlist) greater lower
