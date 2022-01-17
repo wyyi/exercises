@@ -52,7 +52,7 @@ is 25.
 -}
 -- DON'T FORGET TO SPECIFY THE TYPE IN HERE
 sumOfSquares :: Num a => a -> a -> a
-sumOfSquares x y = x ^ 2 + y ^ 2
+sumOfSquares x y = x * x + y * y
 
 {- | Implement a function that returns the last digit of a given number.
 
@@ -116,7 +116,7 @@ and finds a sum of the numbers inside this string.
 The string contains only spaces and/or numbers.
 -}
 strSum :: [Char] -> Int
-strSum str = sum (map read (words str) :: [Int])
+strSum str = sum (map read (words str))
 
 {- | Write a function that takes a number and a list of numbers and
 returns a string, saying how many elements of the list are strictly
@@ -132,8 +132,9 @@ and lower than 6 elements (4, 5, 6, 7, 8 and 9).
 🕯 HINT: Use recursion to implement this function.
 -}
 lowerAndGreater :: Int -> [Int] -> [Char]
-lowerAndGreater n list = show n ++ " is greater than " ++ show greater
-  ++ " elements and lower than " ++ show lower ++ " elements"
-  where	greater	= length (filter ( < n ) list)
-        lower	= length (filter ( > n ) list)
-
+lowerAndGreater n list = output n list (0::Int) (0::Int)
+  where output num numlist greater lower
+          | null numlist = show num ++ " is greater than " ++ show greater ++ " elements and lower than " ++ show lower ++ " elements"
+          | head numlist < num = output num (tail numlist) (greater + 1) lower
+          | head numlist > num = output num (tail numlist) greater (lower + 1)
+          | otherwise = output num (tail numlist) greater lower
