@@ -73,6 +73,7 @@ return the removed element.
 >>> removeAt 10 [1 .. 5]
 (Nothing,[1,2,3,4,5])
 -}
+removeAt :: (Eq a) => Int -> [a] -> (Maybe a, [a])
 removeAt index list
   | index < 0 = (Nothing, list)
   | list == [] = (Nothing, list)
@@ -91,7 +92,8 @@ lists of even lengths.
 ♫ NOTE: Use eta-reduction and function composition (the dot (.) operator)
   in this function.
 -}
-evenLists = error "TODO"
+evenLists :: [[a]] -> [[a]]
+evenLists = filter (even . length)
 
 {- | The @dropSpaces@ function takes a string containing a single word
 or number surrounded by spaces and removes all leading and trailing
