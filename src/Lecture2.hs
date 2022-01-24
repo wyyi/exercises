@@ -48,7 +48,9 @@ zero, you can stop calculating product and return 0 immediately.
 84
 -}
 lazyProduct :: [Int] -> Int
-lazyProduct = error "TODO"
+lazyProduct [] = 1
+lazyProduct (0:xs) = 0
+lazyProduct (x:xs) = x * lazyProduct xs
 
 {- | Implement a function that duplicates every element in the list.
 
@@ -58,7 +60,8 @@ lazyProduct = error "TODO"
 "ccaabb"
 -}
 duplicate :: [a] -> [a]
-duplicate = error "TODO"
+duplicate [] = []
+duplicate (x:xs) = x:x:duplicate xs
 
 {- | Implement function that takes index and a list and removes the
 element at the given position. Additionally, this function should also
@@ -70,7 +73,14 @@ return the removed element.
 >>> removeAt 10 [1 .. 5]
 (Nothing,[1,2,3,4,5])
 -}
-removeAt = error "TODO"
+removeAt index list
+  | index < 0 = (Nothing, list)
+  | list == [] = (Nothing, list)
+  | index == 0 = (Just (head list), tail list)
+  | otherwise = (element, list')
+    where result = removeAt (index - 1) (tail list)
+          element = fst result
+          list' = (head list): snd result 
 
 {- | Write a function that takes a list of lists and returns only
 lists of even lengths.
