@@ -109,7 +109,10 @@ spaces.
 
 🕯 HINT: look into Data.Char and Prelude modules for functions you may use.
 -}
-dropSpaces = error "TODO"
+
+dropSpaces :: [Char] -> [Char]
+dropSpaces string = dropWhile space (reverse (dropWhile space (reverse string)))
+  where space char = char == ' '
 
 {- |
 
